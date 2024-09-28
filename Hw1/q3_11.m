@@ -68,7 +68,7 @@ T = ss(A, B, C, D);
 % Z = initial(T, [1 0 0 0 0 0], 10);
 % times = linspace(0, 10, numel(Z(:,1)));
 
-t = linspace(0, 10, 2000);
+t = linspace(0, 10, 200);
 f = 2*cos(t);
 
 Z = lsim(T, f, t);
@@ -77,10 +77,17 @@ lsim(T,f,t);
 
 %% Boxes
 figure();
+vid = VideoWriter("Question3_11.avi");
+vid.FrameRate = 20;
+vid.Quality = 85;
+open(vid);
+
 for i = 1:size(Z, 1)
     pause(.01);
     boxPlotter(Z(i,1), Z(i,2), Z(i,3));
+    writeVideo(vid, getframe(gcf));
 end
+close(vid)
 %% Springs
 
 
