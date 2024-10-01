@@ -1,10 +1,43 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item HW1, Q 3.10
+   \item Parameters
+   \item A, B, C, D Matrices
+   \item Simulation
+\end{itemize}
+\begin{verbatim}
 clc; clear all; close all; format compact
 
 % Jack Vranicar
 % jjv20@fsu.edu
-%% HW1, Q 3.10
+\end{verbatim}
 
-%% Parameters
+
+\subsection*{HW1, Q 3.10}
+
+
+
+\subsection*{Parameters}
+
+\begin{verbatim}
 m_3 = 1; % kg
 m_2 = 2; %kg
 m_1 = 1; %kg
@@ -15,9 +48,12 @@ f_v1 = 1; % N*s/m
 
 k_2 = 1; % N/m
 k_1 = 1; % N/m
+\end{verbatim}
 
 
-%% A, B, C, D Matrices
+\subsection*{A, B, C, D Matrices}
+
+\begin{verbatim}
 A = [
     0 , 1 , 0 , 0 , 0 , 0;
     -k_2/m_1 , (-f_v3 - f_v2)/(m_2) , 0 , (f_v2)/(m_2) , (k_2)/(m_2),...
@@ -50,14 +86,17 @@ C = [
 
 ];
 
-D = [ 
+D = [
     0;
     0;
     0;
 ];
+\end{verbatim}
 
-%% Simulation
 
+\subsection*{Simulation}
+
+\begin{verbatim}
 T = ss(A, B, C, D);
 
 Z = initial(T, [1 0 0 0 0 0], 10);
@@ -81,3 +120,11 @@ figure("WindowState", "maximized")
     ylabel("x_3")
     xlabel("Time (s)")
     hold off
+\end{verbatim}
+
+\includegraphics [width=4in]{q3_10_01.eps}
+
+
+
+\end{document}
+
