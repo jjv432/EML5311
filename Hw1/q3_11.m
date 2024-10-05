@@ -1,18 +1,7 @@
 clc; clear all; close all; format compact;
-
-
-clc; clear all; close all; format compact
-
 % Jack Vranicar
 % jjv20@fsu.edu
-%% HW1, Q 3.10
-
-%{
-
-    It seems like the force is being applied to the inner top box, not the
-    outer box. =(
-
-%}
+%% HW1, Q 3.11
 
 %% Parameters
 m_3 = 1; % kg
@@ -29,22 +18,22 @@ k_1 = 1; % N/m
 
 %% A, B, C, D Matrices
 A = [
-    0 , 1 , 0 , 0 , 0 , 0;
-    -k_2/m_1 , (-f_v3 - f_v2)/(m_2) , 0 , (f_v2)/(m_2) , (k_2)/(m_2) , (f_v3)/(m_2);
-    0 , 0 , 0 , 1 , 0 , 0;
-    0 , (f_v2)/(m_2) , (k_1)/(m_2) , (-f_v2 - f_v1)/(m_2) , (k_1)/(m_2) , (f_v2)/(m_2);
-    0 , 0 , 0 , 0 , 0 , 1;
-    (k_2)/(m_3) , (f_v3)/(m_3) , (-k_1)/(m_3) , (f_v1)/(m_3) , (k_1 - k_2)/(m_3) , (-f_v3 - f_v1)/(m_3);
+    0 1 0 0 0 0
+    (-k_2/m_1), (-f_v2-f_v3)/m_1, 0, f_v2/m_1, k_2/m_1, f_v3/m_1
+    0 0 0 1 0 0
+    0, f_v2/m_2, -k_1/m_2, (-f_v2-f_v1)/m_2, k_1/m_2, f_v1/m_2
+    0 0 0 0 0 1
+    k_2/m_3, f_v3/m_3, k_1/m_3, f_v1/m_3, (-k_1-k_2)/m_3, (-f_v3-f_v1)/m_3
     ];
 
 B = [
-0;
-0;
-0;
-0;
-0;
-(1)/(m_3);
-];
+    0;
+    0;
+    0;
+    0;
+    0;
+    (1)/(m_3);
+    ];
 
 C = [
 
@@ -55,11 +44,7 @@ C = [
 
 ];
 
-D = [
-    0;
-    0;
-    0;
-    ];
+D = 0;
 
 %% Simulation
 
@@ -68,7 +53,7 @@ T = ss(A, B, C, D);
 % Z = initial(T, [1 0 0 0 0 0], 10);
 % times = linspace(0, 10, numel(Z(:,1)));
 
-t = linspace(0, 10, 200);
+t = 0:.05:10;
 f = 2*cos(t);
 
 Z = lsim(T, f, t);
@@ -88,7 +73,8 @@ for i = 1:size(Z, 1)
     writeVideo(vid, getframe(gcf));
 end
 close(vid)
-%% Springs
 
-
-
+%%
+%
+% <include>boxPlotter.m</include>
+%
