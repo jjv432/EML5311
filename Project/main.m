@@ -33,6 +33,14 @@ time = linspace(0, 5, 1000);
 tau = 0 * ones(size(time, 2), 1);
 ss_resp = lsim(G, tau, time, [pi; 0]);
 
+%% ODE 45
+% solving for theta or theta dd?
+dynamics = @(tau, theta)(1/I) * (tau - m*g*sin(theta)*l/2);
+[tout, xout] = ode45(dynamics, [0 10], [1 0]);
+%order of inputs to ode45: ode function, timespan, initial conditions
+figure()
+plot(tout, xout(:,1))
+
 %% Animate Rectangle
 
 xvals = w*[-.5 -.5 .5 .5];
@@ -42,9 +50,9 @@ coords = [xvals; yvals];
 figure();
 thetas = linspace(0, 2*pi, 50);
 
-for i = 1:length(ss_resp)
+for i = 1:length(xout)
 
-    theta = -pi/2 - ss_resp(i);
+    theta = xout(i);
     rotMatrix = [sin(theta), cos(theta); -cos(theta), sin(theta)];
 
     rotCoords = rotMatrix* coords;
