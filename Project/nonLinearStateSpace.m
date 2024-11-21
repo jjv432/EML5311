@@ -12,14 +12,19 @@ C = [1 0; 0 1];
 D = [0; 0];
 
 G = ss(A, B, C, D);
+t = 0:.001:.01;
+
+Kp = 0;
+theta_des = pi/2;
 
 positionHistory = [];
 
 % Create a loop to update theta at small increments
 for i = 1:1000
+    u = Kp*(theta_des -end_theta)*ones(length(t), 1);
 
 % Simulate the system as linear for a short amount of time
-simValues = initial(G, [end_theta end_theta_dot], .01);
+simValues = lsim(G, u, t, [end_theta end_theta_dot]);
 thetas = simValues(:, 1);
 end_theta = thetas(end);
 end_theta_dot = simValues(end, 2);
